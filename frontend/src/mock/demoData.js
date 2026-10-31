@@ -75,6 +75,40 @@ function formatOffsetDate(daysOffset = 0) {
   return `${y}-${m}-${day}`
 }
 
+const wikiSection = content => ({ content, edited_by: '曾', edited_at: `${DEMO_BASE_DATE_STR}T08:00:00Z` })
+export const DEMO_INSTRUMENTS = [
+  { id: 1, name: 'PPMS 综合物性测量系统', model: 'DynaCool 9 T（含 VSM 选件）', manufacturer: 'Quantum Design', location: '低温物性实验室 105', manager: 'Daisy', status: '正常', created_by: 1,
+    sections: {
+      operation: wikiSection('### 上机与降温\n1. 检查样品杆、O 形圈和接插件，确认样品固定牢靠、导线绝缘，杆上无松散碎屑。\n2. 确认冷头、压缩机、冷却水及真空状态。DynaCool 为无液氦系统；其他液氦平台需单独核对液位，不照搬补液流程。\n3. 室温测量各电极电阻，记录接线图与激励电流；插杆后执行抽空与置换，再按设备 SOP 降温。\n4. 霍尔测量在正负场均采集数据，使用 $R_{xy}^{odd}(H)=[R_{xy}(H)-R_{xy}(-H)]/2$ 抑制纵向混入，保留原始数据。\n5. 先以 10–20 Oe/s 做低场试扫；正式速率按温度稳定性、样品响应和设备手册确定。VSM 测量应先检查样品居中与支架背景。'),
+      precautions: wikiSection('### 安全与数据质量\n- 强磁场区域禁止铁磁工具、银行卡及不兼容的植入设备进入。\n- 拔杆前回零场、回到规定温度并按 SOP 放气；禁止强行拔插。\n- 避免用过大电流造成焦耳热，先做电流依赖性测试。低温接触电阻可能显著变化。\n- 每次记录样品、杆号、桥路、接线、温度稳定判据、磁场扫描方向和速率。反对称化不能替代接触与漏电排查。'),
+      faq: wikiSection('### 温度不稳定怎么办？\n先检查冷却水流量、压缩机告警和腔体真空，再检查样品热锚与激励功率。减小电流，增加等待时间；比较设定温度、腔体读数与样品电阻漂移，稳定后再采点。\n\n### 霍尔曲线不对称或跳变\n核查电极定义和电流换向，测量零场接触电阻，检查粘接线与引线受力。对正反扫分别反对称化；不能把单次曲线偏移直接当成交换偏置。\n\n### VSM 背景过大\n使用同批支架空白、记录装样方向与质量；检查居中扫描，必要时联系负责人，不直接扣一条任意直线。') },
+    logs: [
+      { id: 2, date: formatOffsetDate(-2), author_id: 2, author_name: 'Daisy', content: '冷头运行噪声与压缩机压力正常，检查冷却水过滤器与流量；清洁样品杆密封面并更换老化 O 形圈。抽空后保压检查通过。用标准电阻做 300–10 K 温度循环，平台稳定后记录漂移；继续观察低温段。', attachments: [] },
+      { id: 1, date: formatOffsetDate(-16), author_id: 1, author_name: '曾', content: '桥路 2 低温间歇跳变：定位到样品杆接插件接触不良。重新插接并对线束作应力释放，室温及 20 K 连续监测均未再跳变。原故障曲线保留作排查参考；下一次上机先测各电极接触电阻。', attachments: [] }
+    ], files: [] },
+  { id: 2, name: '磁控溅射系统', model: '多靶位直流 / 射频', manufacturer: '实验室定制', location: '薄膜制备室 108', manager: '曾', status: '正常', created_by: 1, sections: { operation: wikiSection('确认冷却水与本底真空，预溅射后再开挡板。记录 Ar 压强、功率、时间和靶基距；按 SOP 缓慢放气。'), precautions: wikiSection('高压与真空设备须培训后操作。靶材冷却异常时停止沉积。'), faq: wikiSection('速率漂移先检查靶面状态与压强；用独立厚度测量重新标定。') }, logs: [], files: [] },
+  { id: 3, name: '显微拉曼光谱仪', model: '共焦 532 / 633 nm', manufacturer: 'Horiba', location: '光谱室 203', manager: 'DOG001', status: '维护中', created_by: 3, sections: { operation: wikiSection('硅峰校准后，从最低功率开始采谱，记录物镜、积分时间和光栅。'), precautions: wikiSection('二维材料易受激光加热损伤，比较功率依赖并记录焦点。'), faq: wikiSection('峰位变化先排除校准、温漂和加热，不唯一归因于掺杂位点。') }, logs: [], files: [] },
+  { id: 4, name: '管式炉（CVT 生长）', model: '双温区石英管炉', manufacturer: '科晶', location: '晶体生长室 101', manager: 'DOG002', status: '正常', created_by: 4, sections: { operation: wikiSection('核对石英安瓿封管、称量与温区校准，按升温程序运行并自然冷却。'), precautions: wikiSection('密封管有爆裂风险，使用防护屏；含碘输运剂在通风柜称量。'), faq: wikiSection('成核过密时记录并比较温差、输运剂负载和源料形貌。') }, logs: [], files: [] },
+  { id: 5, name: '探针台与光电测试系统', model: '屏蔽探针台 / 源表 / 脉冲光源', manufacturer: 'Keithley 等', location: '器件测试室 205', manager: 'DOG001', status: '正常', created_by: 3, sections: { operation: wikiSection('暗态稳定后接入光脉冲，记录波长、功率密度、脉宽、偏压与采样率。'), precautions: wikiSection('控制栅漏电，避免探针划伤器件；使用相应波段的激光防护。'), faq: wikiSection('基线漂移与光响应幅度分别评估，采用局部暗态基线提取净光电流。') }, logs: [], files: [] }
+]
+
+const demoDat = '# 虚构演示数据，非真实测量\nT_K\tH_T\tR_xx_ohm\tR_xy_ohm\n' + [2, 20, 100, 300].flatMap(t => Array.from({ length: 11 }, (_, i) => { const h = i - 5; return `${t}\t${h.toFixed(2)}\t${(1200 + t * 0.3 + h * h * 0.8).toFixed(3)}\t${(h * 0.12 + 0.4 * Math.tanh(h)).toFixed(5)}` })).join('\n')
+const demoRecord = (id, author_id, author_name, title, offset, instrument_ids, content, extra = {}) => ({ id, author_id, author_name, title, date: formatOffsetDate(offset), instrument_ids, sample: '', tags: [], content, visibility: 'group', attachments: [], threads: [], ai_chats: [], ...extra })
+export const DEMO_EXPERIMENTS = [
+  demoRecord(1, 2, 'Daisy', 'CrSBr/Pt 异质结 2–300 K 反常霍尔与磁电阻', -1, [1], '器件 CP-07，四端纵向与横向桥路同步采集，先确认暗态温度稳定。每个温度点测量正反磁场分支，保留原始接线定义。\n\n使用 $R_{xy}^{odd}(H)=[R_{xy}(H)-R_{xy}(-H)]/2$ 提取奇分量；纵向分量做对称化。低温非线性横向信号尚需排除接触混入及普通霍尔多带贡献。\n\n附件仅为虚构演示片段；下一步补电流依赖、空白 Pt 和角度对照，不据此认定磁近邻效应。', {
+    sample: 'CP-07 · CrSBr/Pt', tags: ['霍尔', '磁电阻', '低温'], attachments: [{ id: 1, name: 'CP07_demo_transport.dat', size: demoDat.length, type: 'text/plain', content: demoDat, author_id: 2, author_name: 'Daisy' }],
+    threads: [{ id: 1, title: '低场非线性信号的对照方案', author_id: 2, author_name: 'Daisy', created_at: `${DEMO_BASE_DATE_STR}T08:00:00Z`, posts: [
+      { id: 1, author_id: 2, author_name: 'Daisy', created_at: `${DEMO_BASE_DATE_STR}T08:17:00Z`, content: '低场横向分量有非线性，建议先比较正反扫的重复性。', attachments: [] },
+      { id: 2, author_id: 3, author_name: 'DOG001', created_at: `${DEMO_BASE_DATE_STR}T09:34:00Z`, content: '请加入电流换向并分别处理两条扫描分支，检查热电势与纵向混入。', attachments: [] },
+      { id: 3, author_id: 1, author_name: '曾', created_at: `${DEMO_BASE_DATE_STR}T09:51:00Z`, content: '先做 Pt 空白与角度依赖，记录温度稳定时间。曲线形状本身还不能确定机制。', attachments: [] }
+    ] }], ai_chats: [{ id: 1, title: '霍尔预处理与对照建议', saved_by: 2, saved_by_name: 'Daisy', saved_at: `${DEMO_BASE_DATE_STR}T09:00:00Z`, model: '演示模型', messages: [{ role: 'user', content: '如何检查该横向非线性信号？' }, { role: 'assistant', content: '先保留原始分支，再做反对称化并核对接线。通过电流换向、Pt 空白和角度依赖检验伪信号。当前演示片段不足以确定反常霍尔机制。' }] }] }),
+  demoRecord(2, 2, 'Daisy', 'CP-07 光照下磁光响应初测', 0, [1, 5], '同一器件在固定磁场节点下进行暗–光–暗序列。记录光源波长、功率及腔体温度，以局部暗态基线求 $I_{ph}=I_{light}-I_{dark}$。\n\n温度仍在缓慢弛豫，暂不解释为本征磁光耦合；后续补等温对照与光功率依赖。', { visibility: 'private', sample: 'CP-07 · CrSBr/Pt', tags: ['光响应', '初测'] }),
+  demoRecord(3, 4, 'DOG002', 'Fe 掺杂 SnSe2 的 CVT 生长日志', -3, [4], '名义 Fe 加料比 3%，仅作生长批次标签。碘输运剂约 5 mg/cm³，双温区源端 750 ℃、生长端 650 ℃，保温 7 天后自然冷却（虚构演示参数，实际操作依设备 SOP）。\n\n出炉见片状金色晶体及少量细碎晶粒。记录安瓿尺寸、源料批次与温区位置；后续用 XRD/EDS 检查物相与成分，不能用加料比代替实际掺杂量。', { sample: 'FS2-CVT-09', tags: ['CVT', '生长'], attachments: [{ id: 1, name: 'FS2_microscope_placeholder.jpg', size: 145820, type: 'image/jpeg', author_id: 4, author_name: 'DOG002' }] }),
+  demoRecord(4, 3, 'DOG001', 'α-In2Se3 光电晶体管的光脉冲突触可塑性测试', -4, [5], '固定读出偏压，用 532 nm 脉冲比较脉宽和间隔依赖。每次脉冲前后保留暗态弛豫段。\n\n分别报告原始电流、局部基线与净光响应；缓慢基线漂移不直接等同于习惯化。下一步补保持、复位、栅漏电与重复周期测试。', { sample: 'IS3-FET-12', tags: ['光脉冲', '器件'] }),
+  demoRecord(5, 1, '曾', 'Pt 薄膜溅射速率与厚度标定', -7, [2], 'Ar 压强 0.4 Pa，直流功率 20 W；预溅射 3 min，开挡板后分 30/60/120 s 沉积在同批基片上（虚构演示）。\n\n以台阶仪厚度对沉积时间拟合，速率约 0.05 nm/s。检查零点截距及重复样品误差；更换靶材后重新标定，保存功率、靶基距和本底真空。', { sample: 'Pt-cal-09', tags: ['Pt', '标定'] }),
+  demoRecord(6, 99, '张远（2024届博士 · 已毕业）', 'PPMS 低温霍尔测量接触电阻排查经验', -900, [1], '降温后横向电压偶发跳变。先停扫并降低激励，逐对检查接触电阻；发现一根电压引线在热收缩时接触不稳。\n\n重新键合并留应力弯，室温与低温复测。对照记录表明异常与接触相关；不要仅靠数据平滑掩盖跳变。接线图、杆号及排查顺序应随记录长期保存。', { date: '2024-05-12', sample: '旧批次 Hall-04', tags: ['经验', '接触电阻'], threads: [{ id: 1, title: '新样品上机前的接线检查', author_id: 3, author_name: 'DOG001', posts: [{ id: 1, author_id: 3, author_name: 'DOG001', created_at: `${DEMO_BASE_DATE_STR}T10:08:00Z`, content: '已把逐对接触电阻与应力释放加入上机检查，感谢往年经验。', attachments: [] }] }] })
+]
+
 export const DEMO_SEMINARS = [
   {
     id: 101,

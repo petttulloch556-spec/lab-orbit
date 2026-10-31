@@ -3,7 +3,10 @@
  * 用于 GitHub Pages 纯静态展示环境，拦截所有 /api/* 请求，在浏览器本地模拟持久化与完整交互体验
  */
 
+import { handleExperimentRequest } from './experimentAdapter.js'
 import {
+  DEMO_EXPERIMENTS,
+  DEMO_INSTRUMENTS,
   DEMO_BASE_DATE_STR,
   DEMO_MEMBERS,
   DEMO_SITE_CONFIG,
@@ -18,7 +21,7 @@ import {
   DEMO_EMAILS,
   DEMO_FEEDBACK_ITEMS,
   DEMO_FAVORITES
-} from './demoData'
+} from './demoData.js'
 
 const DEMO_TODAY = DEMO_BASE_DATE_STR || '2026-09-10'
 
@@ -37,16 +40,26 @@ const STORAGE_KEYS = {
   MAILBOX_CONFIG: 'laborbit_demo_mailbox_config',
   SMTP_CONFIG: 'laborbit_demo_smtp_config',
   FEEDBACK: 'laborbit_demo_feedback',
-  FAVORITES: 'laborbit_demo_favorites'
+  FAVORITES: 'laborbit_demo_favorites',
+  EXPERIMENTS: 'laborbit_demo_experiments',
+  INSTRUMENTS: 'laborbit_demo_instruments'
 }
 
 // 初始化或重置持久化数据
 export function initDemoStorage(force = false) {
   if (typeof localStorage === 'undefined') return
 
-  const isCurrentVersion = localStorage.getItem(STORAGE_KEYS.VERSION) === '4.5'
+  // Add the new module without resetting existing visitors' other demo edits.
+  if (!force && localStorage.getItem(STORAGE_KEYS.VERSION) === '4.5') {
+    localStorage.setItem(STORAGE_KEYS.EXPERIMENTS, JSON.stringify(DEMO_EXPERIMENTS))
+    localStorage.setItem(STORAGE_KEYS.INSTRUMENTS, JSON.stringify(DEMO_INSTRUMENTS))
+    localStorage.setItem(STORAGE_KEYS.VERSION, '4.6')
+  }
+  const isCurrentVersion = localStorage.getItem(STORAGE_KEYS.VERSION) === '4.6'
   if (!isCurrentVersion || force) {
-    localStorage.setItem(STORAGE_KEYS.VERSION, '4.5')
+    localStorage.setItem(STORAGE_KEYS.VERSION, '4.6')
+    localStorage.setItem(STORAGE_KEYS.EXPERIMENTS, JSON.stringify(DEMO_EXPERIMENTS))
+    localStorage.setItem(STORAGE_KEYS.INSTRUMENTS, JSON.stringify(DEMO_INSTRUMENTS))
     localStorage.setItem(STORAGE_KEYS.SEMINARS, JSON.stringify(DEMO_SEMINARS))
     localStorage.setItem(STORAGE_KEYS.PAPERS, JSON.stringify(DEMO_ARXIV_PAPERS))
     localStorage.setItem(STORAGE_KEYS.NOTICES, JSON.stringify(DEMO_NOTICES))
@@ -138,6 +151,9 @@ export async function demoAxiosAdapter(config) {
   const method = (config.method || 'get').toLowerCase()
   const body = parseJsonBody(config)
 
+  const experimentResponse = await handleExperimentRequest({ config, cleanUrl, method, body, getParam, keys: STORAGE_KEYS })
+  if (experimentResponse) return experimentResponse
+
   // 模拟稍微真实的微小延迟 (20ms ~ 50ms)
   await new Promise(r => setTimeout(r, 30))
 
@@ -192,7 +208,7 @@ export async function demoAxiosAdapter(config) {
   }
   if (cleanUrl === '/api/auth/invite-codes') {
     return respond([
-      { id: 1, code: 'ASTRO-2026', note: '新学期研究生入组注册', registration_role: 'member', registration_identity: 'student', is_active: true }
+      { id: 1, code: 'ZENG-2026', note: '新学期研究生入组注册', registration_role: 'member', registration_identity: 'student', is_active: true }
     ])
   }
 

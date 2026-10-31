@@ -44,6 +44,38 @@ api.interceptors.response.use(
   }
 )
 
+const multipart = (payload = {}, files = []) => {
+  const form = new FormData()
+  form.append('payload', JSON.stringify(payload))
+  files.forEach(file => form.append('files', file))
+  return form
+}
+export const experimentsApi = {
+  list: params => api.get('/api/experiments', { params }),
+  create: data => api.post('/api/experiments', data),
+  get: id => api.get(`/api/experiments/${id}`),
+  update: (id, data) => api.put(`/api/experiments/${id}`, data),
+  remove: id => api.delete(`/api/experiments/${id}`),
+  visibility: (id, visibility) => api.put(`/api/experiments/${id}/visibility`, { visibility }),
+  attach: (id, files) => api.post(`/api/experiments/${id}/attachments`, multipart({}, files)),
+  removeAttachment: (id, aid) => api.delete(`/api/experiments/${id}/attachments/${aid}`),
+  saveChat: (id, data) => api.post(`/api/experiments/${id}/ai-chats`, data),
+  removeChat: (id, cid) => api.delete(`/api/experiments/${id}/ai-chats/${cid}`),
+  thread: (id, data, files) => api.post(`/api/experiments/${id}/threads`, multipart(data, files)),
+  post: (id, tid, data, files) => api.post(`/api/experiments/${id}/threads/${tid}/posts`, multipart(data, files)),
+  removePost: (id, tid, pid) => api.delete(`/api/experiments/${id}/threads/${tid}/posts/${pid}`),
+}
+export const instrumentsApi = {
+  list: () => api.get('/api/instruments'),
+  create: data => api.post('/api/instruments', data),
+  get: id => api.get(`/api/instruments/${id}`),
+  update: (id, data) => api.put(`/api/instruments/${id}`, data),
+  remove: id => api.delete(`/api/instruments/${id}`),
+  log: (id, data, files) => api.post(`/api/instruments/${id}/logs`, multipart(data, files)),
+  removeLog: (id, lid) => api.delete(`/api/instruments/${id}/logs/${lid}`),
+  files: (id, files) => api.post(`/api/instruments/${id}/files`, multipart({}, files)),
+}
+
 export const authApi = {
   login: (email, password) => api.post('/api/auth/login', { email, password }),
   register: (name, nickname, email, password, invite_code, identity = 'student') =>

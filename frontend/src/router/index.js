@@ -2,6 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
 const routes = [
+  { path: '/experiments', component: () => import('../views/ExperimentsView.vue'), meta: { requiresAuth: true } },
+  { path: '/experiments/:id', component: () => import('../views/ExperimentDetailView.vue'), meta: { requiresAuth: true } },
+  { path: '/instruments', component: () => import('../views/InstrumentsView.vue'), meta: { requiresAuth: true } },
+  { path: '/instruments/:id', component: () => import('../views/InstrumentDetailView.vue'), meta: { requiresAuth: true } },
   { path: '/feedback', component: () => import('../views/FeedbackView.vue'), meta: { requiresAuth: true } },
   { path: '/account', component: () => import('../views/AccountView.vue'), meta: { requiresAuth: true } },
   {

@@ -21,6 +21,8 @@ const pageTitles = {
   '/seminars': '学术日程',
   '/mailbox': '学术邮箱',
   '/resources': '资料库',
+  '/experiments': '实验数据',
+  '/instruments': '仪器',
   '/library': '文献库',
   '/favorites': '我的收藏',
   '/account': '账户设置',

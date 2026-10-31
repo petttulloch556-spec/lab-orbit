@@ -172,6 +172,8 @@ const items = [
   { to: '/mailbox', label: '学术邮箱', icon: 'envelope' },
   { to: '/library', label: '文献库', icon: 'paper-library' },
   { to: '/resources', label: '资料库', icon: 'resource-db' },
+  { to: '/experiments', label: '实验数据', icon: 'atom' },
+  { to: '/instruments', label: '仪器', icon: 'gear' },
 ]
 
 const roleLabel = computed(() => ({ teacher: '导师', admin: '管理员' }[user.value?.role] || '组员'))

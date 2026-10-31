@@ -70,6 +70,7 @@ const navItems = [
   { to: '/arxiv', label: '文献推荐', icon: 'feed-paper' },
   { to: '/seminars', label: '学术日程', icon: 'schedule' },
   { to: '/mailbox', label: '学术邮箱', icon: 'envelope' },
+  { to: '/experiments', label: '实验数据', icon: 'atom' },
   { to: '/resources', label: '资料库', icon: 'resource-db' },
 ]
 

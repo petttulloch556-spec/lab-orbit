@@ -107,6 +107,9 @@ describe('Sidebar Custom SVG Icons and Label Update', () => {
     expect(navbarContent).toContain("{ to: '/seminars', label: '学术日程', icon: 'schedule' }")
     expect(navbarContent).toContain("{ to: '/library', label: '文献库', icon: 'paper-library' }")
     expect(navbarContent).toContain("{ to: '/resources', label: '资料库', icon: 'resource-db' }")
+    expect(navbarContent).toContain("{ to: '/experiments', label: '实验数据', icon: 'atom' }")
+    expect(navbarContent).toContain("{ to: '/instruments', label: '仪器', icon: 'gear' }")
+    expect(navbarContent.indexOf("to: '/experiments'")).toBeGreaterThan(navbarContent.indexOf("to: '/resources'"))
     expect(navbarContent).not.toContain("{ to: '/resources', label: '教材资料'")
   })
 
@@ -129,6 +132,9 @@ describe('Sidebar Custom SVG Icons and Label Update', () => {
     expect(mobileNavContent).toContain("{ to: '/arxiv', label: '文献推荐', icon: 'feed-paper' }")
     expect(mobileNavContent).toContain("{ to: '/seminars', label: '学术日程', icon: 'schedule' }")
     expect(mobileNavContent).toContain("{ to: '/resources', label: '资料库', icon: 'resource-db' }")
+    expect(mobileNavContent).toContain("{ to: '/experiments', label: '实验数据', icon: 'atom' }")
+    expect(mobileNavContent.indexOf("to: '/experiments'")).toBeLessThan(mobileNavContent.indexOf("to: '/resources'"))
+    expect(mobileNavContent).not.toContain("to: '/instruments'")
     expect(mobileNavContent).not.toContain("{ to: '/resources', label: '教材资料'")
   })
 

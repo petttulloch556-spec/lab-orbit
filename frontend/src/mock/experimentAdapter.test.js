@@ -1,0 +1,118 @@
+import { beforeEach, describe, expect, it } from 'vitest'
+import { demoAxiosAdapter, initDemoStorage } from './demoAdapter'
+import { DEMO_MEMBERS } from './demoData'
+
+const store = new Map()
+globalThis.localStorage = { getItem: key => store.get(key) ?? null, setItem: (key, value) => store.set(key, String(value)), removeItem: key => store.delete(key), clear: () => store.clear() }
+const login = id => { localStorage.setItem('labhub_user', JSON.stringify(DEMO_MEMBERS.find(m => m.id === id))); localStorage.setItem('labhub_token', 'demo_test') }
+const request = async (url, method = 'get', data, params) => (await demoAxiosAdapter({ url: `/api${url}`, method, data, params })).data
+const denied = promise => expect(promise).rejects.toMatchObject({ response: { status: 403 } })
+const create = data => request('/experiments', 'post', { title: '新记录', date: '2026-09-10', content: '正文', sample: 'sample-01', instrument_ids: [1], tags: ['测试'], ...data })
+const multipart = (payload, files = []) => { const form = new FormData(); form.append('payload', JSON.stringify(payload)); files.forEach(f => form.append('files', f)); return form }
+
+describe('实验 / 仪器演示接口', () => {
+  beforeEach(() => { localStorage.clear(); initDemoStorage(true); login(2) })
+  it('默认私有；服务端身份字段不能被请求体伪造', async () => {
+    const record = await create({ author_id: 1, ai_chats: [{ id: 10 }], attachments: [{ name: 'fake' }] })
+    expect(record.visibility).toBe('private'); expect(record.author_id).toBe(2); expect(record.ai_chats).toEqual([]); expect(record.attachments).toEqual([])
+    expect((await request('/experiments', 'get', null, { scope: 'mine' })).every(r => r.author_id === 2)).toBe(true)
+    login(3); await denied(request(`/experiments/${record.id}`)); await denied(request('/experiments?scope=all'))
+    login(1); expect((await request(`/experiments/${record.id}`)).id).toBe(record.id)
+    await denied(request(`/experiments/${record.id}`, 'put', { title: '越权' })); await denied(request(`/experiments/${record.id}`, 'delete'))
+  })
+  it('作者更新、公开、改回私有、删除；管理员仍不能切换他人可见性', async () => {
+    const r = await create()
+    expect((await request(`/experiments/${r.id}`, 'put', { title: '更新' })).title).toBe('更新')
+    await request(`/experiments/${r.id}/visibility`, 'put', { visibility: 'group' })
+    login(3); expect((await request(`/experiments/${r.id}`)).title).toBe('更新')
+    login(1); await denied(request(`/experiments/${r.id}/visibility`, 'put', { visibility: 'private' }))
+    login(2); await request(`/experiments/${r.id}/visibility`, 'put', { visibility: 'private' })
+    login(3); await denied(request(`/experiments/${r.id}`))
+    login(2); await request(`/experiments/${r.id}`, 'delete'); await expect(request(`/experiments/${r.id}`)).rejects.toMatchObject({ response: { status: 404 } })
+  })
+  it('筛选正文、样品、标签、仪器、作者、年份，并按日期倒序', async () => {
+    await create({ title: 'older', date: '2025-01-01', content: '独特内容' })
+    await create({ title: 'newer', content: '独特内容' })
+    const rows = await request('/experiments?scope=mine&q=独特内容&instrument_id=1&author_id=2')
+    expect(rows.map(r => r.title)).toEqual(['newer', 'older'])
+    expect((await request('/experiments?scope=mine&q=sample-01&year=2025')).map(r => r.title)).toEqual(['older'])
+    expect((await request('/experiments?scope=mine&q=测试&instrument_id=5')).length).toBe(0)
+    expect((await request('/experiments?scope=group')).every(r => r.visibility === 'group')).toBe(true)
+  })
+  it('公开记录可开多个话题及回复；仅作者可删帖；改私有后讨论保留但不允许发言', async () => {
+    const r = await create({ visibility: 'group' })
+    login(3)
+    let result = await request(`/experiments/${r.id}/threads`, 'post', multipart({ title: '问题一', content: '$R=V/I$' }))
+    const tid = result.threads[0].id
+    result = await request(`/experiments/${r.id}/threads/${tid}/posts`, 'post', multipart({ content: '补充实验' }))
+    expect(result.threads[0].posts).toHaveLength(2)
+    login(1); await denied(request(`/experiments/${r.id}/threads/${tid}/posts/${result.threads[0].posts[1].id}`, 'delete'))
+    login(3); await request(`/experiments/${r.id}/threads/${tid}/posts/${result.threads[0].posts[1].id}`, 'delete')
+    login(2); await request(`/experiments/${r.id}/visibility`, 'put', { visibility: 'private' })
+    await denied(request(`/experiments/${r.id}/threads`, 'post', { title: '不允许', content: '内容' }))
+    await request(`/experiments/${r.id}/visibility`, 'put', { visibility: 'group' })
+    expect((await request(`/experiments/${r.id}`)).threads[0].posts).toHaveLength(1)
+  })
+  it('AI 对话只经保存接口落盘，保存人字段不能伪造，只有保存人可删除', async () => {
+    const r = await create({ visibility: 'group' })
+    expect(r.ai_chats).toEqual([])
+    login(3); const saved = await request(`/experiments/${r.id}/ai-chats`, 'post', { title: '分析', model: 'test-model', saved_by: 1, messages: [{ role: 'user', content: '问题' }, { role: 'assistant', content: '建议' }] })
+    expect(saved.ai_chats[0]).toMatchObject({ saved_by: 3, model: 'test-model' })
+    login(1); await denied(request(`/experiments/${r.id}/ai-chats/1`, 'delete'))
+    login(2); expect((await request(`/experiments/${r.id}`)).ai_chats).toHaveLength(1)
+    login(3); expect((await request(`/experiments/${r.id}/ai-chats/1`, 'delete')).ai_chats).toEqual([])
+  })
+  it('曾与 Daisy 可见记录不同，毕业生作者正常保留，仪器关联记录按当前身份过滤', async () => {
+    const daisy = await request('/instruments/1')
+    expect(daisy.related_experiments.some(r => r.id === 2)).toBe(true)
+    expect(daisy.related_experiments.find(r => r.author_id === 99).author_name).toContain('已毕业')
+    login(3); expect((await request('/instruments/1')).related_experiments.some(r => r.id === 2)).toBe(false)
+    login(1); expect((await request('/instruments/1')).related_experiments.some(r => r.id === 2)).toBe(true)
+    expect((await request('/experiments?scope=mine')).map(r => r.author_id)).toEqual([1])
+    expect((await request('/experiments?scope=all'))).toHaveLength(6)
+  })
+  it('成员可创建和编辑仪器分区；创建者或管理员可删仪器；日志仅作者可删', async () => {
+    const i = await request('/instruments', 'post', { name: '测试仪器', created_by: 1, status: '维护中' })
+    expect(i).toMatchObject({ created_by: 2, status: '维护中' })
+    login(3); const updated = await request(`/instruments/${i.id}`, 'put', { sections: { operation: '# 操作', faq: '排查' } })
+    expect(updated.sections.operation).toMatchObject({ content: '# 操作', edited_by: 'DOG001' })
+    await denied(request(`/instruments/${i.id}`, 'delete'))
+    const log = await request(`/instruments/${i.id}/logs`, 'post', multipart({ date: '2026-09-10', content: '维护', author_id: 1 }))
+    expect(log.logs[0].author_id).toBe(3)
+    login(1); await denied(request(`/instruments/${i.id}/logs/1`, 'delete'))
+    login(3); expect((await request(`/instruments/${i.id}/logs/1`, 'delete')).logs).toEqual([])
+    login(2); expect((await request(`/instruments/${i.id}`, 'delete')).success).toBe(true)
+    login(1); expect((await request('/instruments/5', 'delete')).success).toBe(true)
+  })
+  it('附件保存文本、保留非文本元数据；记录附件仅作者可维护', async () => {
+    const r = await create({ visibility: 'group' })
+    let result = await request(`/experiments/${r.id}/attachments`, 'post', multipart({}, [new File(['x\ty\n1\t2'], 'data.dat', { type: 'text/plain' }), new File(['image'], 'image.png', { type: 'image/png' })]))
+    expect(result.attachments[0].content).toContain('1\t2'); expect(result.attachments[1].content).toBeUndefined()
+    login(1); await denied(request(`/experiments/${r.id}/attachments/${result.attachments[0].id}`, 'delete'))
+    login(2); result = await request(`/experiments/${r.id}/attachments/${result.attachments[0].id}`, 'delete'); expect(result.attachments).toHaveLength(1)
+    await expect(request(`/experiments/${r.id}/attachments`, 'post', multipart({}, [new File(['x'], 'bad.exe')]))).rejects.toThrow('类型')
+    const manual = await request('/instruments/1/files', 'post', multipart({}, [new File(['pdf'], 'manual.pdf')]))
+    expect(manual.files[0].name).toBe('manual.pdf')
+  })
+  it('讨论帖子和维护日志携带附件', async () => {
+    const r = await create({ visibility: 'group' }), file = new File(['T,H\n2,1'], 'data.csv', { type: 'text/csv' })
+    const thread = await request(`/experiments/${r.id}/threads`, 'post', multipart({ title: '附件讨论', content: '请查看' }, [file]))
+    expect(thread.threads[0].posts[0].attachments[0].content).toBe('T,H\n2,1')
+    const result = await request('/instruments/1/logs', 'post', multipart({ date: '2026-09-10', content: '维护日志' }, [file]))
+    expect(result.logs[0].attachments[0].content).toBe('T,H\n2,1')
+  })
+  it('拒绝未登录、无效输入和未知子路径', async () => {
+    localStorage.removeItem('labhub_token'); await expect(request('/experiments')).rejects.toMatchObject({ response: { status: 401 } }); login(2)
+    await expect(create({ title: '' })).rejects.toMatchObject({ response: { status: 422 } })
+    await expect(create({ visibility: 'public' })).rejects.toMatchObject({ response: { status: 422 } })
+    await expect(request('/experiments/1/unknown', 'post')).rejects.toMatchObject({ response: { status: 404 } })
+  })
+  it('升级版本只追加新版块种子，不重置已有演示数据', () => {
+    localStorage.setItem('laborbit_demo_version_v5', '4.5')
+    localStorage.setItem('laborbit_demo_seminars', '[{"id":9999}]')
+    localStorage.removeItem('laborbit_demo_experiments'); initDemoStorage()
+    expect(localStorage.getItem('laborbit_demo_version_v5')).toBe('4.6')
+    expect(JSON.parse(localStorage.getItem('laborbit_demo_seminars'))).toEqual([{ id: 9999 }])
+    expect(JSON.parse(localStorage.getItem('laborbit_demo_experiments'))).toHaveLength(6)
+  })
+})
