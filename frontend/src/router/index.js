@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import { isChunkLoadError, reloadForFreshBuild } from '../utils/chunkReload'
 
 const routes = [
   { path: '/experiments', component: () => import('../views/ExperimentsView.vue'), meta: { requiresAuth: true } },
@@ -127,5 +128,16 @@ router.beforeEach(async (to, from, next) => {
     next()
   }
 })
+
+router.onError((error, to) => {
+  if (isChunkLoadError(error)) reloadForFreshBuild(to?.fullPath)
+})
+
+if (typeof window !== 'undefined') {
+  window.addEventListener('vite:preloadError', event => {
+    event.preventDefault()
+    reloadForFreshBuild(router.currentRoute.value?.fullPath)
+  })
+}
 
 export default router
