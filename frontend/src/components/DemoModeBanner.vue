@@ -84,7 +84,7 @@ function handleToggleRole() {
           <span class="user-role-badge" :class="currentUser?.role === 'admin' ? 'badge-teacher' : 'badge-student'">
             {{ currentUser?.role === 'admin' ? '管理员' : '普通成员' }}
           </span>
-          <span class="user-name truncate">{{ currentUser?.name || '李华 (导师 / 管理员)' }}</span>
+          <span class="user-name truncate">{{ currentUser?.name || '曾 (导师 / 管理员)' }}</span>
         </div>
 
         <div class="actions-group">

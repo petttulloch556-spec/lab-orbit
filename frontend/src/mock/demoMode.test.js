@@ -28,18 +28,18 @@ describe('Demo Mode & Mock Adapter', () => {
     expect(token).toBeTruthy()
     expect(userRaw).toBeTruthy()
     const user = JSON.parse(userRaw)
-    expect(user.name).toContain('李华')
+    expect(user.name).toContain('曾')
     expect(user.role).toBe('admin')
   })
 
   it('switchDemoRole switches between admin and member roles', () => {
     const member = switchDemoRole('member')
     expect(member.role).toBe('member')
-    expect(member.name).toContain('陈晨')
+    expect(member.name).toContain('Daisy')
 
     const admin = switchDemoRole('admin')
     expect(admin.role).toBe('admin')
-    expect(admin.name).toContain('李华')
+    expect(admin.name).toContain('曾')
   })
 
   it('demoAxiosAdapter serves system status and settings', async () => {

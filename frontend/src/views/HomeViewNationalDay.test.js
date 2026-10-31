@@ -19,7 +19,7 @@ describe('HomeView National Day Flag integration', () => {
     expect(content).toContain('national-day-flag-badge')
     expect(content).toContain('/assets/icons/national-flag.svg')
     expect(content).toContain('alt="国庆红旗"')
-    expect(content).toContain('天体物理与交叉科学课题组')
+    expect(content).toContain('Zeng Group')
     expect(content).toContain('@keyframes national-day-flag-wave')
   })
 })

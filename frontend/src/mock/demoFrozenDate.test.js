@@ -51,7 +51,7 @@ describe('Demo Mode Frozen Date (2026-09-10)', () => {
     expect(next).toBeTruthy()
     expect(next.id).toBe(101)
     expect(next.date).toBe('2026-09-12')
-    expect(next.presenter_name).toContain('陈晨')
+    expect(next.presenter_name).toContain('Daisy')
   })
 
   it('respects explicitly passed date even in demo mode', () => {

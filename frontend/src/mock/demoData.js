@@ -6,8 +6,8 @@
 export const DEMO_MEMBERS = [
   {
     id: 1,
-    name: '李华 (导师 / 管理员)',
-    real_name: '李华',
+    name: '曾 (导师 / 管理员)',
+    real_name: '曾',
     email: 'lihua@lab.edu',
     role: 'admin',
     identity: 'teacher',
@@ -18,8 +18,8 @@ export const DEMO_MEMBERS = [
   },
   {
     id: 2,
-    name: '陈晨 (博士生 / 普通成员)',
-    real_name: '陈晨',
+    name: 'Daisy (博士生 / 普通成员)',
+    real_name: 'Daisy',
     email: 'chenchen@lab.edu',
     role: 'member',
     identity: 'student',
@@ -56,7 +56,7 @@ export const DEMO_MEMBERS = [
 
 export const DEMO_SITE_CONFIG = {
   initialized: true,
-  lab_name: '天体物理与交叉科学课题组',
+  lab_name: 'Zeng Group',
   lab_short_name: 'LabOrbit',
   invite_code_enabled: true,
   public_feed_enabled: true,
@@ -82,7 +82,7 @@ export const DEMO_SEMINARS = [
     time: '14:30',
     location: '理科实验楼 302 会议室 / 腾讯会议：982-334-112',
     presenter_id: 2,
-    presenter_name: '陈晨 (博士生 / 普通成员)',
+    presenter_name: 'Daisy (博士生 / 普通成员)',
     topic: '弱引力透镜高阶统计量与暗能量状态方程限制',
     abstract: '本报告总结我们基于最新宽视场巡天测光红移样本，利用峰值计数与虚动量功率谱提取非高斯宇宙学信息的研究进展，并讨论哈勃常数与 S8 张力的观测证据。',
     slides_url: 'https://example.com/slides/demo_weak_lensing.pdf',
@@ -94,7 +94,7 @@ export const DEMO_SEMINARS = [
         seminar_id: 101,
         position: 0,
         presenter_id: 2,
-        presenter_name: '陈晨 (博士生 / 普通成员)',
+        presenter_name: 'Daisy (博士生 / 普通成员)',
         arxiv_id: '2403.08852',
         slides_url: ''
       },
@@ -136,7 +136,7 @@ export const DEMO_SEMINARS = [
         seminar_id: 102,
         position: 1,
         presenter_id: 1,
-        presenter_name: '李华 (导师 / 管理员)',
+        presenter_name: '曾 (导师 / 管理员)',
         arxiv_id: '2401.10992',
         slides_url: ''
       }
@@ -148,7 +148,7 @@ export const DEMO_SEMINARS = [
     time: '14:30',
     location: '理科实验楼 302 会议室',
     presenter_id: 1,
-    presenter_name: '李华 (导师 / 管理员)',
+    presenter_name: '曾 (导师 / 管理员)',
     topic: '下一代空间巡天大科学装置科学目标与课题组关键攻关任务研讨',
     abstract: '对新一年度巡天数据处理流水线及弱引力透镜高阶统计量提取进行顶层设计，梳理各子课题当前进展与论文投稿节点。',
     slides_url: 'https://example.com/slides/group_annual_plan.pdf',
@@ -160,7 +160,7 @@ export const DEMO_SEMINARS = [
         seminar_id: 103,
         position: 0,
         presenter_id: 1,
-        presenter_name: '李华 (导师 / 管理员)',
+        presenter_name: '曾 (导师 / 管理员)',
         arxiv_id: '2405.12984',
         slides_url: ''
       }
@@ -172,7 +172,7 @@ export const DEMO_SEMINARS = [
     time: '14:30',
     location: '理科实验楼 302 会议室',
     presenter_id: 1,
-    presenter_name: '李华 (导师 / 管理员)',
+    presenter_name: '曾 (导师 / 管理员)',
     topic: '空间巡天大科学装置科学目标与课题组年度攻关任务研讨',
     abstract: '对新一年度巡天数据处理流水线及星系形态自动分类网络进行顶层设计，梳理各子课题当前进展与论文投稿节点。',
     slides_url: 'https://example.com/slides/group_annual_plan.pdf',
@@ -210,12 +210,12 @@ export const DEMO_ARXIV_PAPERS = [
     abstract: 'Next-generation Stage-IV cosmic shear surveys offer unprecedented sensitivity to dark energy and neutrino mass constraints, but their statistical power is limited by systematic uncertainties from baryonic physics and intrinsic alignments. We present an end-to-end simulation-based inference framework using symbolic regression and neural density estimators to marginalize over baryonic scenarios while retaining cosmological constraints at sub-percent precision.',
     recommender: {
       id: 2,
-      name: '陈晨 (博士生 / 普通成员)',
-      real_name: '陈晨',
+      name: 'Daisy (博士生 / 普通成员)',
+      real_name: 'Daisy',
       identity: 'student',
       role: 'member'
     },
-    recommended_by: '陈晨 (博士生 / 普通成员)',
+    recommended_by: 'Daisy (博士生 / 普通成员)',
     recommended_at: formatOffsetDate(-2),
     notes: '精读重点：第 4 节关于重子反馈主成分分析的参数化公式非常值得我们在下一步的数据管线中借鉴。',
     likes_count: 7,
@@ -228,9 +228,9 @@ export const DEMO_ARXIV_PAPERS = [
         id: 501,
         paper_id: 301,
         user_id: 1,
-        user_name: '李华 (导师 / 管理员)',
+        user_name: '曾 (导师 / 管理员)',
         user_nickname: '李教授',
-        content: '方法论非常扎实，周五组会上请陈晨就公式(12)的退化方向重点展开讨论一下。',
+        content: '方法论非常扎实，周五组会上请Daisy就公式(12)的退化方向重点展开讨论一下。',
         created_at: formatOffsetDate(-2) + ' 16:20:00'
       },
       {
@@ -257,12 +257,12 @@ export const DEMO_ARXIV_PAPERS = [
     abstract: 'We introduce AstroFM, a 1.2-billion-parameter masked autoencoder pre-trained on optical and infrared spectra from large-scale ground-based surveys. The model demonstrates robust zero-shot generalization across chemical abundance estimation, stellar parameter estimation, and anomaly detection for rare objects such as white dwarf-main sequence binaries and carbon stars.',
     recommender: {
       id: 1,
-      name: '李华 (导师 / 管理员)',
-      real_name: '李华',
+      name: '曾 (导师 / 管理员)',
+      real_name: '曾',
       identity: 'teacher',
       role: 'admin'
     },
-    recommended_by: '李华 (导师 / 管理员)',
+    recommended_by: '曾 (导师 / 管理员)',
     recommended_at: formatOffsetDate(-5),
     notes: 'AI for Science 顶尖力作，建议做光谱分类的同学必读。',
     likes_count: 12,
@@ -275,8 +275,8 @@ export const DEMO_ARXIV_PAPERS = [
         id: 503,
         paper_id: 302,
         user_id: 2,
-        user_name: '陈晨 (博士生 / 普通成员)',
-        user_nickname: '陈晨',
+        user_name: 'Daisy (博士生 / 普通成员)',
+        user_nickname: 'Daisy',
         content: '模型权重大约 4.8GB，已经在我们组的 A100 计算节点上部署好测试镜像，大家可以在 JupyterHub 里直接调用。',
         created_at: formatOffsetDate(-4) + ' 11:30:00'
       }
@@ -349,7 +349,7 @@ export const DEMO_NOTICES = [
     importance: 'high',
     start_date: formatOffsetDate(-2),
     end_date: formatOffsetDate(5),
-    created_by_name: '李华 (导师)',
+    created_by_name: '曾 (导师)',
     created_at: formatOffsetDate(-2) + ' 09:00:00',
     attachments: [
       {
@@ -368,7 +368,7 @@ export const DEMO_NOTICES = [
     importance: 'normal',
     start_date: formatOffsetDate(-5),
     end_date: formatOffsetDate(10),
-    created_by_name: '李华 (导师)',
+    created_by_name: '曾 (导师)',
     created_at: formatOffsetDate(-5) + ' 15:00:00',
     attachments: []
   },
@@ -380,7 +380,7 @@ export const DEMO_NOTICES = [
     importance: 'normal',
     start_date: formatOffsetDate(-1),
     end_date: formatOffsetDate(3),
-    created_by_name: '陈晨 (博士生 / 体验官)',
+    created_by_name: 'Daisy (博士生 / 体验官)',
     created_at: formatOffsetDate(-1) + ' 17:30:00',
     attachments: []
   }
@@ -588,7 +588,7 @@ export const DEMO_PENDING_IMPORTS = [
     file_attachments: [],
     status: 'pending',
     created_by_id: 2,
-    created_by_name: '陈晨 (博士生 / 体验官)',
+    created_by_name: 'Daisy (博士生 / 体验官)',
     created_at: formatOffsetDate(-1) + ' 10:00:00'
   }
 ]
@@ -604,7 +604,7 @@ export const DEMO_TALKS = [
     notes: '青年学者前沿交流',
     event_type: 'talk',
     poster_url: '',
-    source: '智能导入 (陈晨)'
+    source: '智能导入 (Daisy)'
   },
   {
     id: 702,
@@ -770,11 +770,11 @@ export const DEMO_EMAILS = [
     to_addr: 'lihua@lab.edu',
     date_str: formatOffsetDate(-3) + ' 11:00:00',
     created_at: formatOffsetDate(-3) + ' 11:00:00',
-    snippet: '尊敬的李华教授：您负责的重点项目《宽视场巡天中弱引力透镜多维系统误差建模与宇宙学限制》（项目号：12233005）2026 年度进展报告填报通道已开放，请组织项目组成员系统梳理本年度代表性成果并在线提交。',
-    body_text: '尊敬的李华教授：您负责的重点项目（项目批准号：12233005）年度进展报告现已开放填报，请登录科学基金网络信息系统在线填写并于规定时间前提交依托单位审核。',
+    snippet: '尊敬的曾教授：您负责的重点项目《宽视场巡天中弱引力透镜多维系统误差建模与宇宙学限制》（项目号：12233005）2026 年度进展报告填报通道已开放，请组织项目组成员系统梳理本年度代表性成果并在线提交。',
+    body_text: '尊敬的曾教授：您负责的重点项目（项目批准号：12233005）年度进展报告现已开放填报，请登录科学基金网络信息系统在线填写并于规定时间前提交依托单位审核。',
     body_html: `<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1e293b;">
       <h3 style="color: #0f172a;">国家自然科学基金委员会 业务提醒函</h3>
-      <p>尊敬的 <strong>李华</strong> 教授：</p>
+      <p>尊敬的 <strong>曾</strong> 教授：</p>
       <p>您主持的重点项目《宽视场巡天中弱引力透镜多维系统误差建模与宇宙学限制》（项目批准号：12233005）2026 年度进展报告填报通道已正式开放。</p>
       <p>请组织项目组成员系统梳理本年度代表性成果、论文发表及经费执行情况，通过科学基金网络信息系统在线完成填报。</p>
       <p style="color: #64748b; font-size: 13px;">（系统自动发送邮件，请勿直接回复）</p>
@@ -823,7 +823,7 @@ export const DEMO_FEEDBACK_ITEMS = [
     id: 1,
     title: '建议在组会日历导出中增加提醒提前量设置',
     content: '目前的 .ics 日历文件导入手机或 Mac 默认是准点提醒。希望能在导出时支持选择提前 15 分钟或提前 1 天提醒，这样更方便提前准备汇报和课件。',
-    author: '陈晨 (博士生 / 普通成员)',
+    author: 'Daisy (博士生 / 普通成员)',
     author_id: 2,
     page: '/seminars',
     resolved: true,
@@ -831,7 +831,7 @@ export const DEMO_FEEDBACK_ITEMS = [
     replies: [
       {
         id: 101,
-        author: '李华 (导师 / 管理员)',
+        author: '曾 (导师 / 管理员)',
         content: '非常实用的建议！已经在排期管理模块中更新了日历提醒规则，现在下载的 .ics 会自动携带提前 30 分钟和提前 1 天的双重响铃提醒。',
         created_at: formatOffsetDate(-2) + 'T16:40:00',
         read_at: formatOffsetDate(-1) + 'T09:00:00'
@@ -850,7 +850,7 @@ export const DEMO_FEEDBACK_ITEMS = [
     replies: [
       {
         id: 102,
-        author: '李华 (导师 / 管理员)',
+        author: '曾 (导师 / 管理员)',
         content: '收到，这个功能很棒，已记录在下一步系统迭代需求清单中，近期版本会支持直接解析 arXiv API 生成标准 BibTeX 格式。',
         created_at: formatOffsetDate(0) + 'T09:30:00',
         read_at: null

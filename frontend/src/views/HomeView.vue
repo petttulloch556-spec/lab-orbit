@@ -956,7 +956,7 @@ watch([isCustomLayoutActive, isHomeEditMode], () => {
       <section class="forecast-main">
         <div class="forecast-intro">
           <h1 class="group-title-heading">
-            <span>{{ siteConfig.labName || '天体物理与交叉科学课题组' }}</span>
+            <span>{{ siteConfig.labName || 'Zeng Group' }}</span>
             <img
               v-if="isMidAutumn"
               src="/assets/icons/moon.svg"

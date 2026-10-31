@@ -755,7 +755,7 @@ function getEmailSnippet(item) {
   const fallbackSnippets = {
     801: '各位老师同学：兹定于本周五举行关于复杂系统与机器学习前沿的线上线下联合学术报告会。主讲人：张教授（前沿交叉科学研究院）。时间：本周五 14:30。地点：理科大楼 302 报告厅 / 腾讯会议：882-910-334。重点探讨多模态表征学习与高维数据建模。',
     802: '各位同仁：2026 年学术年会拟定于 10 月中旬举行。现启动分会场征文与大会口头报告申请，涵盖复杂网络、智能计算与交叉科学等前沿专题。',
-    803: '尊敬的李华教授：您负责的重点项目《复杂高维系统多模态协同优化与学习》（项目号：12233005）2026 年度进展报告填报通道已开放，请组织项目组成员系统梳理本年度代表性成果并在线提交。',
+    803: '尊敬的曾教授：您负责的重点项目《复杂高维系统多模态协同优化与学习》（项目号：12233005）2026 年度进展报告填报通道已开放，请组织项目组成员系统梳理本年度代表性成果并在线提交。',
     804: 'Dear Prof. Hua Li: We have received the referee report for your manuscript "Precision Optimization in Complex Networks". The referee recommends Minor Revision. Please check attached referee comments and submit your revised manuscript within 30 days.'
   }
   if (item.id && fallbackSnippets[item.id]) return fallbackSnippets[item.id]

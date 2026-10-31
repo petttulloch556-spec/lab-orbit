@@ -56,7 +56,7 @@ export function isDemoMode() {
 
 /**
  * 初始化演示环境：自动注入体验凭据，免密直通主看板
- * 默认进入管理员（李华 - 导师）视角
+ * 默认进入管理员（曾 - 导师）视角
  */
 export function initDemoAuth() {
   if (!isDemoMode()) return

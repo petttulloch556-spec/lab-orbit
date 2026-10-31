@@ -82,7 +82,6 @@ function onUpdatePinned(val) {
     <NoticeScanBanner />
     <SystemTutorialModal />
     <DemoModeBanner v-if="isDemo && !isExcludedRoute" />
-    <div v-if="isDemo && !isExcludedRoute" class="demo-watermark-overlay" aria-hidden="true"></div>
   </div>
 </template>
 
@@ -110,18 +109,4 @@ function onUpdatePinned(val) {
   overflow: hidden;
 }
 
-.demo-watermark-overlay {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9980;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='340' viewBox='0 0 480 340'%3E%3Cg transform='rotate(-22 240 170)'%3E%3Ctext x='240' y='135' text-anchor='middle' dominant-baseline='central' fill='%23ffffff' fill-opacity='0.085' font-size='56' font-family='system-ui, -apple-system, sans-serif' font-weight='600' letter-spacing='4'%3E%E8%99%9A%E6%9E%84%E4%BF%A1%E6%81%AF%3C/text%3E%3Ctext x='240' y='205' text-anchor='middle' dominant-baseline='central' fill='%23ffffff' fill-opacity='0.085' font-size='56' font-family='system-ui, -apple-system, sans-serif' font-weight='600' letter-spacing='4'%3E%E4%BB%85%E4%BE%9B%E5%B1%95%E7%A4%BA%3C/text%3E%3C/g%3E%3C/svg%3E");
-  background-size: 480px 340px;
-}
-
-@media (max-width: 640px) {
-  .demo-watermark-overlay {
-    background-size: 280px 198px;
-  }
-}
 </style>
