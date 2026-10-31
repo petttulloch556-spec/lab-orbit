@@ -776,7 +776,7 @@ onMounted(() => {
               </svg>
             </div>
             <span class="upload-text">{{ localBgUploading ? '正在读取本地媒体...' : '点击选择本地图片或视频作为背景' }}</span>
-            <span class="muted upload-tip">支持 MP4 / WebM / MOV 视频或 PNG / JPG / WebP / TIFF（支持天文/高位深科学图像自动转码）图片，自动适配满屏且静音循环播放</span>
+            <span class="muted upload-tip">支持 MP4 / WebM / MOV 视频或 PNG / JPG / WebP / TIFF（支持显微/高位深科学图像自动转码）图片，自动适配满屏且静音循环播放</span>
           </div>
         </div>
       </div>
@@ -851,11 +851,11 @@ onMounted(() => {
           </div>
           <div class="font-preview-row">
             <span class="preview-tag muted">西文排版</span>
-            <p class="font-preview-line-en">Astrophysics and Interdisciplinary Science Research Group</p>
+            <p class="font-preview-line-en">2D Materials, Magnetism & Sensing-Memory-Computing Devices</p>
           </div>
           <div class="font-preview-row">
             <span class="preview-tag muted">科学数字与符号</span>
-            <p class="font-preview-line-digits mono">0123456789 · Redshift z = 2.45 · Lambda-CDM Cosmology</p>
+            <p class="font-preview-line-digits mono">0123456789 · T_C = 342 K · H = 9 T · R_xy = 1.25 Ω</p>
           </div>
         </div>
       </div>

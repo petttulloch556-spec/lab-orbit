@@ -390,12 +390,12 @@ export async function demoAxiosAdapter(config) {
 
     if (cleanUrl === '/api/arxiv/preview') {
       return respond({
-        title: 'High-Precision Cosmological Inference from JWST Deep Field Galaxy Clustering',
-        authors: 'Alex Turner, Elena Vasquez, Hua Li',
-        journal: 'arXiv:2409.11029',
+        title: 'Temperature-Dependent Hall and Magneto-Photoresponse in CrSBr/Pt Heterostructures',
+        authors: 'Mira Linwood, Evan Qorrel, Daisy',
+        journal: '虚构演示预印本 / arXiv:2409.11029',
         published_date: '2026-09-18',
-        abstract: 'We present cosmological parameter estimations based on three-dimensional clustering of high-redshift galaxies identified in public JWST NIRCam surveys, demonstrating strong sensitivity to primordial non-Gaussianity.',
-        primary_category: 'astro-ph.CO',
+        abstract: 'We compare Hall transport and magneto-photoresponse in CrSBr/Pt heterostructures across temperature, using ordinary Hall subtraction, nonmagnetic references and illumination temperature controls to assess interfacial contributions.',
+        primary_category: 'cond-mat.mes-hall',
         pdf_url: 'https://arxiv.org/pdf/2409.11029.pdf'
       })
     }
@@ -408,7 +408,7 @@ export async function demoAxiosAdapter(config) {
         title: body.title || '最新文献分享',
         authors: body.authors || cur.real_name,
         journal: `arXiv:${body.arxiv_id || '2409.11029'}`,
-        primary_category: body.primary_category || 'astro-ph.CO',
+        primary_category: body.primary_category || 'cond-mat.mes-hall',
         published_date: DEMO_TODAY,
         source_url: `https://arxiv.org/abs/${body.arxiv_id || '2409.11029'}`,
         pdf_url: `https://arxiv.org/pdf/${body.arxiv_id || '2409.11029'}.pdf`,
@@ -925,7 +925,7 @@ export async function demoAxiosAdapter(config) {
     }
   }
 
-  // 11. 天文台报告与学术会议 (Talks)
+  // 11. 学术报告与材料器件会议 (Talks)
   if (cleanUrl.startsWith('/api/talks')) {
     let talks = getStored(STORAGE_KEYS.TALKS, DEMO_TALKS)
     if (cleanUrl === '/api/talks' && method === 'get') {
@@ -1069,9 +1069,9 @@ export async function demoAxiosAdapter(config) {
     }
     if (cleanUrl === '/api/zotero/collections') {
       return respond([
-        { key: 'col1', name: '银河系动力学', parentCollection: false },
-        { key: 'col2', name: '暗物质晕数值模拟', parentCollection: false },
-        { key: 'col3', name: '巡天望远镜管线', parentCollection: 'col1' }
+        { key: 'col1', name: '二维磁体与自旋输运', parentCollection: false },
+        { key: 'col2', name: '铁电光电与感存算器件', parentCollection: false },
+        { key: 'col3', name: 'PPMS 霍尔与磁光响应', parentCollection: 'col1' }
       ])
     }
     if (cleanUrl === '/api/zotero/push') {
@@ -1087,19 +1087,19 @@ export async function demoAxiosAdapter(config) {
     return respond({
       success: true,
       data: {
-        title: 'International Conference on Astrophysics and Data Science 2027',
+        title: 'International Conference on 2D Magnetism and Sensing-Memory-Computing Devices 2027',
         event_type: 'conference',
         sub_type: '国际会议',
         date: '2027-06-15',
         end_date: '2027-06-19',
         city: '上海',
-        organizer: 'TDLI & Shanghai Jiao Tong University',
+        organizer: '2D Materials and Devices Demo Organizing Group',
         abstract_start_date: '2026-10-01',
         abstract_deadline: '2027-01-15',
         early_bird_deadline: '2027-03-31',
         registration_deadline: '2027-05-15',
         website_url: body.url || 'https://example.com/conf',
-        notes: '深入探讨引力透镜、高能天体物理与机器学习巡天技术前沿。'
+        notes: '交流二维磁体/Pt 异质结、铁电光晶体管、磁光响应与视觉感内计算的制备和测量方法（虚构演示会议）。'
       }
     })
   }

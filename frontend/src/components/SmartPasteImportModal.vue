@@ -916,7 +916,7 @@ function handleClose() {
           </div>
           <div class="form-group">
             <label>地点 / 会议号</label>
-            <input v-model="cardForm.location" type="text" class="input-text" placeholder="例如：南大 天文楼302会议室 / 腾讯会议 123-456" />
+            <input v-model="cardForm.location" type="text" class="input-text" placeholder="例如：深圳大学 物理楼302会议室 / 腾讯会议 123-456" />
           </div>
           <div class="form-group">
             <label>报告日期</label>
@@ -944,7 +944,7 @@ function handleClose() {
         <div v-if="selectedType === 'conference'" class="form-grid conf-form">
           <div class="form-group full-width">
             <label>会议名称</label>
-            <input v-model="cardForm.title" type="text" class="input-text" placeholder="例如：2026年中国天体物理学年会" />
+            <input v-model="cardForm.title" type="text" class="input-text" placeholder="例如：2026年二维磁性与感存算器件研讨会" />
           </div>
           <div class="form-group">
             <label>会议类型</label>
@@ -975,7 +975,7 @@ function handleClose() {
           </div>
           <div class="form-group full-width">
             <label>主办单位</label>
-            <input v-model="cardForm.organizer" type="text" class="input-text" placeholder="例如：中国天文学会、南京大学" />
+            <input v-model="cardForm.organizer" type="text" class="input-text" placeholder="例如：二维材料与器件学术交流组" />
           </div>
           <div class="form-group">
             <label>摘要提交开始</label>

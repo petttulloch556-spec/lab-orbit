@@ -681,7 +681,7 @@ defineExpose({ open, select })
 
       <label>
         {{ form.event_type === 'conference' ? '会议名称 / 主题' : '报告标题' }}
-        <input v-model="form.title" required :placeholder="form.event_type === 'conference' ? '如：第十五届全国星系宇宙学学术研讨会' : '如：学术报告题目'" />
+        <input v-model="form.title" required :placeholder="form.event_type === 'conference' ? '如：2026年二维磁性与感存算器件研讨会' : '如：学术报告题目'" />
       </label>
       <div class="form-row" :class="{ 'form-row-3': form.event_type === 'conference' }">
         <label>

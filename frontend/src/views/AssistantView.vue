@@ -150,15 +150,15 @@ const textareaRef = ref(null)
 const promptSuggestions = [
   {
     title: '文献创新点剖析',
-    prompt: '请帮我梳理一篇前沿天文物理学论文的核心创新点、观测方法与结论局限性。'
+    prompt: '请帮我梳理一篇二维磁性论文的核心创新点、样品制备、结构与磁性及输运表征链条，并指出结论的局限性与必要对照。'
   },
   {
-    title: '宇宙学公式推导',
-    prompt: '请写出标准宇宙学模型（LCDM）下光度距离与红移 z 的积分关系式，并给出关键参数的物理意义。'
+    title: '反常霍尔标度推导',
+    prompt: '请推导反常霍尔电阻率与磁化强度、纵向电阻率的关系，比较 skew scattering、side jump 与 intrinsic 三种机制的标度律，说明适用假设及仅靠标度区分机制的局限。'
   },
   {
     title: '科学数据处理脚本',
-    prompt: '请写一段使用 Python 和 Astropy 库读取 FITS 天文图像并绘制平滑天体射电轮廓图的示例代码。'
+    prompt: '请写一段 Python 处理 PPMS 霍尔数据的示例：按升降场分支配对正负磁场进行反对称化，在说明拟合区间与假设后扣除正常霍尔背景，绘制 R_xy–H 回线，保留原始数据及处理参数。'
   },
   {
     title: '学术摘要中英润色',
@@ -1612,7 +1612,7 @@ async function handleClearChat() {
         </div>
 
         <div class="composer-footnote">
-          <span>内容由大模型生成，请结合专业学术文献与天文实际数据进行核验。</span>
+          <span>内容由大模型生成，请结合专业学术文献与实验数据进行核验。</span>
         </div>
       </footer>
 

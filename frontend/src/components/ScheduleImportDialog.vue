@@ -186,7 +186,7 @@ async function save() {
           v-model="pasteText"
           class="paste-area"
           rows="6"
-          placeholder="报告人	日期	arxiv&#10;Daisy	9.9	～&#10;王思齐	9.16	～&#10;赵子涵	9.23	张明，曾"
+          placeholder="报告人	日期	arxiv&#10;Daisy	9.9	～&#10;DOG001	9.16	～&#10;DOG002	9.23	张明，曾"
         />
         <div class="paste-actions">
           <button class="button secondary small" type="button" :disabled="busy || !pasteText.trim()" @click="parsePastedText">

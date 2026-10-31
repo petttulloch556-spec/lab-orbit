@@ -228,7 +228,7 @@ export function weekScheduleIcs(eventsList, calendarName = '课题组周日程',
       `DTSTART:${utcStamp(new Date(startMs))}`,
       `DTEND:${utcStamp(new Date(endMs))}`,
       `SUMMARY:${escapeIcs(summary)}`,
-      `LOCATION:${escapeIcs(item.location || (isSeminar ? '物理楼研讨室 / 腾讯会议' : '天文楼'))}`,
+      `LOCATION:${escapeIcs(item.location || (isSeminar ? '物理楼研讨室 / 腾讯会议' : '物理楼'))}`,
       `DESCRIPTION:${escapeIcs(desc.trim())}`,
       'STATUS:CONFIRMED',
       'END:VEVENT'

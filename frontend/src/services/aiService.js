@@ -705,7 +705,7 @@ export async function sendChatMessageStream({
       paperContext.fullText,
       '----------------------------------------',
       '研读与问答指导原则：',
-      '1. 你是负责研读该论文的资深天文与天体物理学者。上述全文是本次对话的绝对基准与长期记忆。',
+      '1. 你是负责研读该论文的资深凝聚态物理与材料器件学者。上述全文是本次对话的绝对基准与长期记忆。',
       '2. 用户可向你询问该论文的任何问题（包括背景动机、理论假说、推导过程、观测与数值样本、核心图表分析、讨论与局限性等），请严格基于上述全文事实并结合专业知识解答，不得捏造虚假结论。',
       '3. 若用户请求翻译全文或指定章节/段落，请提供高质量学术中文翻译，严格保留所有 LaTeX 数学公式（$...$ 与 $$...$$）和规范学术术语。'
     ].filter(Boolean).join('\n')
@@ -1621,15 +1621,15 @@ export async function callAiCompletion({
 }
 
 /**
- * 使用大模型专业翻译天文/物理学术文献（标题与摘要）
+ * 使用大模型专业翻译凝聚态物理、材料与器件学术文献（标题与摘要）
  * 严格保留 LaTeX 公式，精准转换学术术语
  */
 export async function translatePaperWithAi({ title = '', abstract = '', config, signal } = {}) {
-  const systemPrompt = `你是一个资深天文学与天体物理学学术文献翻译专家。请将给出的英文学术论文标题和摘要翻译为规范、严谨、专业的学术中文。
+  const systemPrompt = `你是一个资深凝聚态物理、材料与器件学术文献翻译专家。请将给出的英文学术论文标题和摘要翻译为规范、严谨、专业的学术中文。
 
 翻译规范与硬性要求：
 1. 必须原样严格保留所有 LaTeX 数学物理公式（如 $...$、$$...$$、\\( ... \\)、\\[ ... \\] 及所有专业数学符号），切勿篡改或翻译公式内的数学变量；
-2. 准确翻译天文学术专用术语（例如：redshift -> 红移，gravitational lensing -> 引力透镜，accretion disk -> 吸积盘，dark matter halo -> 暗物质晕，supernova -> 超新星，spectroscopy -> 光谱学，cosmic microwave background -> 宇宙微波背景 等）；
+2. 准确翻译凝聚态物理、材料与器件专用术语（例如：anomalous Hall effect -> 反常霍尔效应，spin Hall magnetoresistance -> 自旋霍尔磁电阻，magnetic proximity effect -> 磁近邻效应，van der Waals heterostructure -> 范德华异质结，Curie temperature -> 居里温度，memristor -> 忆阻器，in-sensor computing -> 感内计算，photoresponsivity -> 光响应度 等）；
 3. 语调忠实学术原文，用词精炼严谨，避免口语化；
 4. 必须输出严格的 JSON 格式，不要输出任何多余的开头或结尾寒暄：
 {
@@ -1931,17 +1931,17 @@ ${hasSubstantiveText ? rawBody.slice(0, 16000) : '（正文未提供文字描述
     }
   }
 
-  const systemPrompt = `你是一位专业的高校与科研院所天文课题组学术助手。
+  const systemPrompt = `你是一位专业的高校与科研院所二维材料、磁性与感存算器件课题组学术助手。
 你的任务是从给定的邮件内容（${usedVision ? '以及随附的会议海报图片' : '及可能附加的会议通知图片'}）中，准确提取学术会议（如国际会议、学术年会、研讨会、Colloquium、Symposium、高峰论坛等）的关键结构化信息。
 
 请按以下要求提取并输出 JSON：
-1. 完整会议名称 (title)：如“2026年引力透镜与宇宙学前沿研讨会”；
+1. 完整会议名称 (title)：如“2026年二维磁性与感存算器件前沿研讨会”；
 2. 会议类别 (sub_type)：必须是以下之一：国际会议、年会、研讨会、专题研讨、暑期学校、学术论坛；
 3. 会议起始日期 (date)：格式 "YYYY-MM-DD"。当前基准参考年份为 ${refYear} 年（基准日期：${refDate}）。若原文或海报中缺少公历年份，必须以当前年份 ${refYear} 为基准，严禁输出过往年份！；
 4. 会议结束日期 (end_date)：格式 "YYYY-MM-DD"（若为单日会议可与 date 相同或为空）；
 5. 举办城市 (city)：如“开封”、“南京”、“北京”等；
 6. 具体地点/会场 (location)：如酒店、报告厅、大学校区或园区会议中心；
-7. 主办/承办单位 (organizer)：如“中国天文学会引力透镜专业委员会”；
+7. 主办/承办单位 (organizer)：如“二维材料与器件学术交流组”；
 8. 关键重要截止时间（必须以当前年份 ${refYear} 为基准，格式 "YYYY-MM-DD"，无则空 ""）：
    - abstract_start_date: 摘要提交/征文开始开放日期（Call for abstracts / 摘要提交开始时间，格式 "YYYY-MM-DD"，无则空 ""）
    - abstract_deadline: 摘要提交/报告申请截止日期（Abstract submission deadline / 截稿时间，格式 "YYYY-MM-DD"，无则空 ""）

@@ -132,7 +132,7 @@ describe('Home Widget Features & Requirements Specification', () => {
 
     it('displays deadline reason when conference has abstract deadline', () => {
       const mockConf = {
-        title: '宇宙学前沿研讨会',
+        title: '二维磁性前沿研讨会',
         date: '2026-11-20',
         _priority: {
           priorityType: 'abstract',
@@ -147,7 +147,7 @@ describe('Home Widget Features & Requirements Specification', () => {
 
     it('displays urgent deadline when conference abstract deadline is close', () => {
       const mockConf = {
-        title: '星系形成专题会议',
+        title: '晶体生长专题会议',
         date: '2026-11-01',
         _priority: {
           priorityType: 'abstract',
@@ -162,7 +162,7 @@ describe('Home Widget Features & Requirements Specification', () => {
 
     it('displays opening date reason when conference ranks first by event date', () => {
       const mockConf = {
-        title: '引力波天文年会',
+        title: '感存算器件年会',
         date: '2026-11-15',
         _priority: {
           priorityType: 'start',
@@ -359,10 +359,10 @@ describe('Home Widget Features & Requirements Specification', () => {
         libraryCount: '10 篇',
         libraryItems: [
           { id: 1, title: 'Paper 1', category: '透镜' },
-          { id: 2, title: 'Paper 2', category: '星系' },
-          { id: 3, title: 'Paper 3', category: '宇宙学' },
-          { id: 4, title: 'Paper 4', category: '射电' },
-          { id: 5, title: 'Paper 5', category: '黑洞' }
+          { id: 2, title: 'Paper 2', category: '晶体生长' },
+          { id: 3, title: 'Paper 3', category: '二维材料' },
+          { id: 4, title: 'Paper 4', category: '低温输运' },
+          { id: 5, title: 'Paper 5', category: '磁性器件' }
         ]
       })
       expect(html).toContain('icon-paper-library')
@@ -421,11 +421,11 @@ describe('Home Widget Features & Requirements Specification', () => {
         widgetId: 'library',
         size: 'wide',
         libraryItems: [
-          { id: 1, title: '弱引力透镜测量', authors: ['Bartelmann', 'Schneider'], primary_category: 'astro-ph.CO', journal: 'ApJ' }
+          { id: 1, title: '二维磁体反常霍尔测量', authors: ['Mira Linwood', 'Evan Qorrel'], primary_category: 'cond-mat.mes-hall', journal: 'ApJ' }
         ]
       })
-      expect(html).toContain('Bartelmann · Schneider')
-      expect(html).toContain('astro-ph.CO')
+      expect(html).toContain('Mira Linwood · Evan Qorrel')
+      expect(html).toContain('cond-mat.mes-hall')
       expect(html).toContain('ApJ')
       expect(html).not.toContain('查看全文与讨论记录')
       expect(html).toContain('icon-paper-library')
@@ -434,11 +434,11 @@ describe('Home Widget Features & Requirements Specification', () => {
 
   describe('6. Literature Recommendation (arxiv) Widget Redesign', () => {
     const mockPapers = [
-      { id: 1, title: 'Paper 1 (Oldest)', category: 'astro-ph.CO', recommender: { id: 1, name: 'Alice', real_name: 'Alice' }, created_at: '2026-01-01' },
-      { id: 2, title: 'Paper 2', category: 'astro-ph.GA', recommender: { id: 2, name: 'Bob', real_name: 'Bob' }, created_at: '2026-01-02' },
-      { id: 3, title: 'Paper 3', category: 'astro-ph.SR', recommender: { id: 3, name: '王思齐', real_name: '王思齐' }, created_at: '2026-01-03' },
-      { id: 4, title: 'Paper 4', category: 'astro-ph.HE', recommender: { id: 4, name: 'David', real_name: 'David' }, created_at: '2026-01-04' },
-      { id: 5, title: 'Paper 5 (Newest)', category: 'astro-ph.IM', recommender: { id: 5, name: 'Eva', real_name: 'Eva' }, created_at: '2026-01-05' }
+      { id: 1, title: 'Paper 1 (Oldest)', category: 'cond-mat.mes-hall', recommender: { id: 1, name: 'Alice', real_name: 'Alice' }, created_at: '2026-01-01' },
+      { id: 2, title: 'Paper 2', category: 'cond-mat.mtrl-sci', recommender: { id: 2, name: 'Bob', real_name: 'Bob' }, created_at: '2026-01-02' },
+      { id: 3, title: 'Paper 3', category: 'cond-mat.str-el', recommender: { id: 3, name: '王思齐', real_name: '王思齐' }, created_at: '2026-01-03' },
+      { id: 4, title: 'Paper 4', category: 'physics.app-ph', recommender: { id: 4, name: 'David', real_name: 'David' }, created_at: '2026-01-04' },
+      { id: 5, title: 'Paper 5 (Newest)', category: 'cond-mat.mtrl-sci', recommender: { id: 5, name: 'Eva', real_name: 'Eva' }, created_at: '2026-01-05' }
     ]
 
     it('renders medium card with top 3 items sorted newest-first and avoids JSON object serialization', async () => {
@@ -612,7 +612,7 @@ describe('Home Widget Features & Requirements Specification', () => {
             id: 1,
             date: '2026-10-15',
             time: '10:00',
-            topic: '宇宙学前沿',
+            topic: '二维磁性前沿',
             location: '学术交流中心 216',
             presenter_name: '张三'
           }
@@ -781,8 +781,8 @@ describe('Home Widget Features & Requirements Specification', () => {
 
     it('next-seminar sub-cards link directly to seminars with seminar id', async () => {
       const upcomingSeminars = [
-        { id: 201, topic: '弱引力透镜宇宙学前沿研讨', date: '2026-10-15', presenter_name: '张三' },
-        { id: 202, topic: '巡天模拟算法与参数拟合', date: '2026-10-22', presenter_name: '李四' }
+        { id: 201, topic: '二维磁体反常霍尔前沿研讨', date: '2026-10-15', presenter_name: '张三' },
+        { id: 202, topic: 'PPMS 霍尔背景拟合与处理', date: '2026-10-22', presenter_name: '李四' }
       ]
 
       // Wide
@@ -836,7 +836,7 @@ describe('Home Widget Features & Requirements Specification', () => {
 
     it('arxiv sub-cards link directly to arxiv feed with paper_id, arxiv_id and highlight flag', async () => {
       const arxivItems = [
-        { id: 401, title: 'High-z Quasars with JWST', arxiv_id: '2402.12345', recommender: '导师' },
+        { id: 401, title: 'Magneto-photoresponse in CrSBr/Pt', arxiv_id: '2402.12345', recommender: '导师' },
         { id: 402, title: 'Cosmological Simulations Emulator', arxiv_id: '2402.54321', recommender: '重点研读' }
       ]
 
@@ -876,8 +876,8 @@ describe('Home Widget Features & Requirements Specification', () => {
 
     it('mailbox sub-cards link directly to mailbox with email_id query parameter', async () => {
       const mailboxEmails = [
-        { id: 501, subject: '前沿天体物理学术研讨会邀请函', from_name: '学术研讨会组委会' },
-        { id: 502, subject: '高校天文与物理学院学术周报', from_name: '学院秘书' }
+        { id: 501, subject: '二维材料与器件学术研讨会邀请函', from_name: '学术研讨会组委会' },
+        { id: 502, subject: '高校物理与光电工程学院学术周报', from_name: '学院秘书' }
       ]
 
       const wideHtml = await renderWidget({
@@ -915,16 +915,16 @@ describe('Home Widget Features & Requirements Specification', () => {
       const resourcesItems = [
         {
           id: 601,
-          title: 'Astropy 官方文档与计算库',
+          title: 'Gwyddion 官方文档与数据处理工具',
           category: '网站',
-          download_url: 'https://astropy.org'
+          download_url: 'https://gwyddion.net/'
         },
         {
           id: 602,
-          title: 'Cosmology 现代宇宙学教材',
+          title: 'Kittel 固体物理导论',
           category: '经典教材',
-          authors: 'Dodelson',
-          download_url: 'https://example.com/cosmology.pdf'
+          authors: 'Charles Kittel',
+          download_url: 'https://example.com/solid-state.pdf'
         },
         {
           id: 603,
@@ -943,13 +943,13 @@ describe('Home Widget Features & Requirements Specification', () => {
       // Website card: should display "访问" and NOT "下载资料"
       expect(wideHtml).toContain('访问')
       // Non-website card: should display author
-      expect(wideHtml).toContain('Dodelson')
+      expect(wideHtml).toContain('Charles Kittel')
       // Card with no author: should display "下载资料"
       expect(wideHtml).toContain('下载资料')
       // Direct external link with target _blank
-      expect(wideHtml).toContain('href="https://astropy.org"')
+      expect(wideHtml).toContain('href="https://gwyddion.net/"')
       expect(wideHtml).toContain('target="_blank"')
-      expect(wideHtml).toContain('href="https://example.com/cosmology.pdf"')
+      expect(wideHtml).toContain('href="https://example.com/solid-state.pdf"')
 
       // Medium-Wide
       const mwHtml = await renderWidget({
@@ -961,7 +961,7 @@ describe('Home Widget Features & Requirements Specification', () => {
       expect(mwHtml).toContain('访问')
       // Non-website without author should display "下载资料"
       expect(mwHtml).toContain('下载资料')
-      expect(mwHtml).toContain('href="https://astropy.org"')
+      expect(mwHtml).toContain('href="https://gwyddion.net/"')
       expect(mwHtml).toContain('target="_blank"')
 
       // Large
@@ -970,7 +970,7 @@ describe('Home Widget Features & Requirements Specification', () => {
         size: 'large',
         resourcesItems
       })
-      expect(largeHtml).toContain('href="https://astropy.org"')
+      expect(largeHtml).toContain('href="https://gwyddion.net/"')
       expect(largeHtml).toContain('target="_blank"')
     })
   })

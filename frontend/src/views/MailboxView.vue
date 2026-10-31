@@ -2579,7 +2579,7 @@ onBeforeUnmount(() => {
             <input
               v-model="confForm.title"
               type="text"
-              placeholder="如：第二届空间天文与高能天体物理前沿研讨会"
+              placeholder="如：二维磁性与自旋电子学前沿研讨会"
               required
             />
           </label>
@@ -2631,7 +2631,7 @@ onBeforeUnmount(() => {
               <input
                 v-model="confForm.speaker"
                 type="text"
-                placeholder="如：学术委员会 / 计算机系前沿论坛"
+                placeholder="如：二维材料与器件学术交流组"
               />
             </label>
             <label>
@@ -2639,7 +2639,7 @@ onBeforeUnmount(() => {
               <input
                 v-model="confForm.location"
                 type="text"
-                placeholder="如：理科大楼 302 会议室 / 腾讯会议号"
+                placeholder="如：物理楼 302 会议室 / 腾讯会议号"
               />
             </label>
           </div>
@@ -2865,7 +2865,7 @@ onBeforeUnmount(() => {
             <input
               v-model="scheduleForm.title"
               type="text"
-              placeholder="如：学术前沿报告：复杂系统多模态协同优化"
+              placeholder="如：学术前沿报告：二维铁电光晶体管与感内计算"
               required
             />
           </label>
@@ -2903,7 +2903,7 @@ onBeforeUnmount(() => {
               <input
                 v-model="scheduleForm.location"
                 type="text"
-                placeholder="如：理科大楼 302 会议室 / 腾讯会议号"
+                placeholder="如：物理楼 302 会议室 / 腾讯会议号"
               />
             </label>
           </div>

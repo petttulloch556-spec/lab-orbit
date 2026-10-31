@@ -65,7 +65,7 @@ const props = defineProps({
   },
   weatherAdvice: {
     type: String,
-    default: '今夜园区云量极少，适合深度巡天数据标定与天文观测。'
+    default: '关注园区天气，合理安排物理楼、洁净间与微纳加工平台之间的出行。'
   },
   libraryCount: {
     type: String,
@@ -1201,7 +1201,7 @@ const weatherHourlyList = computed(() => {
         </div>
         <div class="home-conf-grid grid-cols-4">
           <router-link
-            v-for="item in (sortedLibraryItems.length ? sortedLibraryItems.slice(0, 4) : [{ id: 1, title: '弱引力透镜宇宙学测量', authors: 'Bartelmann et al.', primary_category: 'astro-ph.CO', published_date: '2024' }, { id: 2, title: '星系团内介质 X 射线观测', authors: 'Sarazin et al.', primary_category: 'astro-ph.HE', published_date: '2023' }, { id: 3, title: '21cm 宇宙微波背景辐射分析', authors: 'Furlanetto et al.', primary_category: 'astro-ph.CO', published_date: '2024' }, { id: 4, title: '高红移类星体巡天搜寻', authors: 'Fan et al.', primary_category: 'astro-ph.GA', published_date: '2022' }])"
+            v-for="item in (sortedLibraryItems.length ? sortedLibraryItems.slice(0, 4) : [{ id: 1, title: '二维磁体/Pt 异质结反常霍尔测量', authors: 'Mira Linwood et al.', primary_category: 'cond-mat.mes-hall', published_date: '2024' }, { id: 2, title: 'Fe 掺杂 SnSe2 的 CVT 生长与磁性表征', authors: 'Evan Qorrel et al.', primary_category: 'cond-mat.mtrl-sci', published_date: '2023' }, { id: 3, title: 'α-In2Se3 铁电光晶体管的突触可塑性', authors: 'Tessa Norvale et al.', primary_category: 'cond-mat.mes-hall', published_date: '2024' }, { id: 4, title: '范德华磁体/Pt 的 SMR 与磁近邻对照', authors: 'Ilan Veycroft et al.', primary_category: 'cond-mat.str-el', published_date: '2022' }])"
             :key="item.id"
             :to="{ path: '/library', query: { q: item.arxiv_id || item.title } }"
             class="home-conf-card-item library-subcard"
@@ -1234,7 +1234,7 @@ const weatherHourlyList = computed(() => {
         </div>
         <div class="home-conf-grid grid-cols-2">
           <router-link
-            v-for="item in (sortedLibraryItems.length ? sortedLibraryItems.slice(0, 2) : [{ id: 1, title: '弱引力透镜测量', authors: 'Bartelmann et al.', primary_category: 'astro-ph.CO', published_date: '2024' }, { id: 2, title: '星系团 X 射线分析', authors: 'Sarazin et al.', primary_category: 'astro-ph.HE', published_date: '2023' }])"
+            v-for="item in (sortedLibraryItems.length ? sortedLibraryItems.slice(0, 2) : [{ id: 1, title: '二维磁体反常霍尔测量', authors: 'Mira Linwood et al.', primary_category: 'cond-mat.mes-hall', published_date: '2024' }, { id: 2, title: 'Fe 掺杂 SnSe2 结构表征', authors: 'Evan Qorrel et al.', primary_category: 'cond-mat.mtrl-sci', published_date: '2023' }])"
             :key="item.id"
             :to="{ path: '/library', query: { q: item.arxiv_id || item.title } }"
             class="home-conf-card-item library-subcard"
@@ -1364,7 +1364,7 @@ const weatherHourlyList = computed(() => {
         </div>
         <div class="home-conf-grid grid-cols-4">
           <a
-            v-for="item in (sortedResourcesItems.length ? sortedResourcesItems.slice(0, 4) : [{ id: 1, title: 'Cosmology (Dodelson)', category: '经典教材', authors: 'Dodelson' }, { id: 2, title: 'Gravitational Lenses (Schneider)', category: '引力透镜', authors: 'Schneider' }, { id: 3, title: 'Astropy 数据处理讲义与实战', category: '代码讲义', authors: 'Astropy Team' }, { id: 4, title: 'MCMC 巡天参数拟合代码库', category: '算法代码', authors: 'Foreman-Mackey' }])"
+            v-for="item in (sortedResourcesItems.length ? sortedResourcesItems.slice(0, 4) : [{ id: 1, title: 'Introduction to Solid State Physics (Kittel)', category: '经典教材', authors: 'Charles Kittel' }, { id: 2, title: 'Magnetism and Magnetic Materials (Coey)', category: '磁性材料', authors: 'J. M. D. Coey' }, { id: 3, title: 'Gwyddion AFM 数据处理讲义与实战', category: '代码讲义', authors: 'Gwyddion 开发团队' }, { id: 4, title: 'PPMS 霍尔数据处理示例', category: '算法代码', authors: '材料输运方法演示组' }])"
             :key="item.id"
             :href="getResourceFirstLink(item) || '/resources'"
             :target="getResourceFirstLink(item) ? '_blank' : undefined"
@@ -1396,7 +1396,7 @@ const weatherHourlyList = computed(() => {
         </div>
         <div class="home-conf-grid grid-cols-2">
           <a
-            v-for="item in (sortedResourcesItems.length ? sortedResourcesItems.slice(0, 2) : [{ id: 1, title: 'Dodelson 现代宇宙学教材', category: '专著', authors: 'Dodelson' }, { id: 2, title: 'Astropy 巡天数据分析指南', category: '代码', authors: 'Astropy Team' }])"
+            v-for="item in (sortedResourcesItems.length ? sortedResourcesItems.slice(0, 2) : [{ id: 1, title: 'Kittel 固体物理导论', category: '专著', authors: 'Charles Kittel' }, { id: 2, title: 'Gwyddion AFM 形貌分析指南', category: '代码', authors: 'Gwyddion 开发团队' }])"
             :key="item.id"
             :href="getResourceFirstLink(item) || '/resources'"
             :target="getResourceFirstLink(item) ? '_blank' : undefined"
@@ -1546,10 +1546,10 @@ const weatherHourlyList = computed(() => {
         <div class="home-conf-grid grid-cols-4">
           <router-link
             v-for="item in (sortedArxivItems.length ? sortedArxivItems.slice(0, 4) : [
-              { id: 1, title: 'Weak lensing shear measurement systematics with Roman Telescope', recommender: '导师' },
-              { id: 2, title: 'Galaxy clustering tomography and neutrino mass constraint', recommender: '前沿速递' },
-              { id: 3, title: 'JWST Cycle 3 Early Results on strongly lensed galaxies', recommender: '重点研读' },
-              { id: 4, title: 'Machine learning for cosmological simulation emulators', recommender: '算法工具' }
+              { id: 1, title: 'Anomalous Hall and magneto-photoresponse in 2D magnet/Pt devices', recommender: '导师' },
+              { id: 2, title: 'CVT growth and Fe distribution in SnSe2 crystals', recommender: '前沿速递' },
+              { id: 3, title: 'Ferroelectric phototransistors for in-sensor computing', recommender: '重点研读' },
+              { id: 4, title: 'Python workflows for PPMS Hall background subtraction', recommender: '算法工具' }
             ])"
             :key="item.id"
             :to="{ path: '/arxiv', query: { paper_id: item.id, arxiv_id: item.arxiv_id, highlight: '1' } }"
@@ -1578,8 +1578,8 @@ const weatherHourlyList = computed(() => {
         <div class="home-conf-grid grid-cols-2">
           <router-link
             v-for="item in (sortedArxivItems.length ? sortedArxivItems.slice(0, 2) : [
-              { id: 1, title: 'Weak lensing shear measurement with Roman Telescope', recommender: '导师' },
-              { id: 2, title: 'Galaxy clustering tomography and neutrino mass', recommender: '重点研读' }
+              { id: 1, title: 'Anomalous Hall measurements in 2D magnet/Pt devices', recommender: '导师' },
+              { id: 2, title: 'CVT growth and magnetic characterization of SnSe2', recommender: '重点研读' }
             ])"
             :key="item.id"
             :to="{ path: '/arxiv', query: { paper_id: item.id, arxiv_id: item.arxiv_id, highlight: '1' } }"

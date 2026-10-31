@@ -35,7 +35,7 @@ export const WIDGET_REGISTRY = {
     id: 'weather',
     name: '今日天气',
     icon: 'sun',
-    description: '学术园区实时气温、温湿度、降水概率与天文视宁度观测适宜度',
+    description: '学术园区实时气温、温湿度与降水概率，辅助实验出行安排',
     supportedSizes: ['minimal', 'small', 'medium', 'large', 'medium-wide', 'wide'],
     defaultSize: 'medium',
     defaultLocation: 'right'

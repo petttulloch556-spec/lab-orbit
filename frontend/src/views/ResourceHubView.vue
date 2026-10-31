@@ -304,7 +304,7 @@
 
         <label>
           名称 *
-          <input v-model="form.title" required placeholder="如：引力透镜导论 / Astropy / NASA ADS" />
+          <input v-model="form.title" required placeholder="如：固体物理导论 / VASP / Materials Project" />
         </label>
 
         <!-- 只有添加教材时才必须填写作者 -->
@@ -378,7 +378,7 @@
             v-model="newCategoryName" 
             required 
             maxlength="20" 
-            placeholder="例如：综述 / 数据库 / 巡天任务" 
+            placeholder="例如：综述 / 晶体结构数据库 / 低温输运"
           />
         </label>
         <div class="dialog-actions">

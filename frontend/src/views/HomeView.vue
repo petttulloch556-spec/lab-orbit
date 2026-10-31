@@ -972,7 +972,7 @@ watch([isCustomLayoutActive, isHomeEditMode], () => {
               title="国庆快乐"
             />
           </h1>
-          <p class="group-name-en">{{ siteConfig.siteSlogan || 'Astrophysics and Interdisciplinary Science Research Group' }}</p>
+          <p class="group-name-en">{{ siteConfig.siteSlogan || '2D Materials, Magnetism & Sensing-Memory-Computing Devices' }}</p>
           <div class="forecast-actions">
             <router-link :to="calendarLink(today)" class="perfect-goat-btn">
               <span class="goat-text">打开学术日程</span>
